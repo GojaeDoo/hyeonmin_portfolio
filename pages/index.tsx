@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import IntroContainer from '../src/components/intro/Intro.container'
+import Intro from './intro/page'
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <IntroContainer />
+        <Intro />
       </main>
     </>
   )
