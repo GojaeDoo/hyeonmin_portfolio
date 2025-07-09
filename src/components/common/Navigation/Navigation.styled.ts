@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const NavigationBar = styled.div`
     position: fixed;
@@ -50,7 +50,7 @@ export const NavigationToggle = styled.div`
     }
 `;
 
-export const NavigationMenu = styled.div`
+export const NavigationMenu = styled.div<{ $open: boolean }>`
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -58,12 +58,15 @@ export const NavigationMenu = styled.div`
     transform: translateY(10px);
     transition: all 0.3s ease;
     pointer-events: none;
-    
-    ${NavigationBar}:hover & {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    z-index: 10;
+    ${({ $open }) => $open && css`
         opacity: 1;
         transform: translateY(0);
         pointer-events: all;
-    }
+    `}
 `;
 
 export const NavigationButton = styled.button`
@@ -98,7 +101,7 @@ export const NavigationButton = styled.button`
     }
 `;
 
-export const ToggleIcon = styled.div`
+export const ToggleIcon = styled.div<{ $open?: boolean }>`
     width: 20px;
     height: 20px;
     position: relative;
@@ -116,7 +119,7 @@ export const ToggleIcon = styled.div`
         height: 2px;
         top: 50%;
         left: 0;
-        transform: translateY(-50%);
+        transform: translateY(-50%) ${props => props.$open ? 'rotate(45deg)' : ''};
     }
     
     &::after {
@@ -124,7 +127,8 @@ export const ToggleIcon = styled.div`
         height: 20px;
         top: 0;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-50%) ${props => props.$open ? 'rotate(45deg)' : ''};
+        opacity: ${props => props.$open ? 0 : 1};
     }
     
     @media (max-width: 768px) {

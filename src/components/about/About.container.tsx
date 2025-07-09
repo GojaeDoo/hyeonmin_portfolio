@@ -36,6 +36,11 @@ export const AboutContainer = () => {
     };
 
     const handleNavigate = (section: string) => {
+        const sectionId = section === 'about' ? 'about' : section === 'skill' ? 'skills' : section;
+        const el = document.getElementById(sectionId);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+        }
     };
 
     useEffect(() => {
@@ -48,68 +53,13 @@ export const AboutContainer = () => {
             }
         };
 
-        const handleWheel = (e: WheelEvent) => {
-            const aboutSection = document.getElementById('about');
-            if (aboutSection) {
-                const rect = aboutSection.getBoundingClientRect();
-                const isInAboutSection = rect.top <= 0 && rect.bottom >= window.innerHeight;
-                
-                if (isInAboutSection) {
-                    // About 섹션 내에서 스크롤할 때
-                    if (e.deltaY > 0) {
-                        // 아래로 스크롤 - Skills로 이동
-                        e.preventDefault();
-                        const skillsSection = document.getElementById('skills');
-                        if (skillsSection) {
-                            skillsSection.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    } else if (e.deltaY < 0) {
-                        // 위로 스크롤 - Intro로 이동
-                        e.preventDefault();
-                        window.scrollTo({
-                            top: 0,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            }
-        };
-
-        const handleKeyDown = (e: KeyboardEvent) => {
-            const aboutSection = document.getElementById('about');
-            if (aboutSection) {
-                const rect = aboutSection.getBoundingClientRect();
-                const isInAboutSection = rect.top <= 0 && rect.bottom >= window.innerHeight;
-                
-                if (isInAboutSection) {
-                    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-                        e.preventDefault();
-                        const skillsSection = document.getElementById('skills');
-                        if (skillsSection) {
-                            skillsSection.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-                        e.preventDefault();
-                        window.scrollTo({
-                            top: 0,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            }
-        };
-
         window.addEventListener('scroll', handleScroll);
-        window.addEventListener('wheel', handleWheel, { passive: false });
-        window.addEventListener('keydown', handleKeyDown);
 
         // 초기 상태 확인
         handleScroll();
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('wheel', handleWheel);
-            window.removeEventListener('keydown', handleKeyDown);
         };
     }, []);
 

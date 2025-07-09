@@ -160,7 +160,7 @@ export const ContentWrapper = styled.div`
     z-index: 1;
 `;
 
-export const IntroBigText = styled.h1<{ animation: string; position: string }>`
+export const IntroBigText = styled.h1<{ $animation: string; $position: string }>`
     font-size: 8rem;
     font-weight: 900;
     color: #f5f5f5;
@@ -168,13 +168,13 @@ export const IntroBigText = styled.h1<{ animation: string; position: string }>`
     position: absolute;
     opacity: 0;
     animation: ${props => {
-        switch(props.animation) {
+        switch(props.$animation) {
             case 'left': return slideInLeft;
             case 'right': return slideInRight;
             default: return fadeInUp;
         }
     }} 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) ${props => {
-        switch(props.animation) {
+        switch(props.$animation) {
             case 'left': return '0s';
             case 'right': return '0.8s';
             default: return '0s';
@@ -183,7 +183,7 @@ export const IntroBigText = styled.h1<{ animation: string; position: string }>`
     font-family: 'Orbitron', 'Rajdhani', 'Arial Black', sans-serif;
     
     ${props => {
-        switch(props.position) {
+        switch(props.$position) {
             case 'top-left':
                 return `
                     top: 15%;
@@ -223,7 +223,7 @@ export const IntroBigText = styled.h1<{ animation: string; position: string }>`
         border-radius: 50%;
         transform: translateX(-50%);
         animation: ${smokeEffect} 1.2s ease-out ${props => {
-            switch(props.animation) {
+            switch(props.$animation) {
                 case 'left': return '1.4s';
                 case 'right': return '2.2s';
                 default: return '1.4s';
@@ -243,7 +243,7 @@ export const IntroBigText = styled.h1<{ animation: string; position: string }>`
         border-radius: 50%;
         transform: translateX(-50%);
         animation: ${smokeEffect2} 1.4s ease-out ${props => {
-            switch(props.animation) {
+            switch(props.$animation) {
                 case 'left': return '1.5s';
                 case 'right': return '2.3s';
                 default: return '1.5s';
@@ -262,7 +262,7 @@ export const IntroBigText = styled.h1<{ animation: string; position: string }>`
         letter-spacing: 0.2em;
         
         ${props => {
-            switch(props.position) {
+            switch(props.$position) {
                 case 'top-left':
                     return `
                         top: 20%;
@@ -285,7 +285,7 @@ export const IntroBigText = styled.h1<{ animation: string; position: string }>`
         letter-spacing: 0.15em;
         
         ${props => {
-            switch(props.position) {
+            switch(props.$position) {
                 case 'top-left':
                     return `
                         top: 25%;

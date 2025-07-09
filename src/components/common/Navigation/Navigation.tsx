@@ -1,4 +1,5 @@
 import * as S from './Navigation.styled';
+import { useState } from 'react';
 
 interface NavigationProps {
     isVisible: boolean;
@@ -6,21 +7,25 @@ interface NavigationProps {
 }
 
 export const Navigation = ({ isVisible, onNavigate }: NavigationProps) => {
+    const [open, setOpen] = useState(false);
     if (!isVisible) return null;
 
     return (
         <S.NavigationBar>
-            <S.NavigationToggle>
-                <S.ToggleIcon />
+            <S.NavigationToggle onClick={() => setOpen(v => !v)}>
+                <S.ToggleIcon $open={open} />
             </S.NavigationToggle>
-            <S.NavigationMenu>
-                <S.NavigationButton onClick={() => onNavigate('about')}>
+            <S.NavigationMenu $open={open}>
+                <S.NavigationButton onClick={() => { setOpen(false); onNavigate('about'); }}>
                     About
                 </S.NavigationButton>
-                <S.NavigationButton onClick={() => onNavigate('skill')}>
+                <S.NavigationButton onClick={() => { setOpen(false); onNavigate('skill'); }}>
                     Skill
                 </S.NavigationButton>
-                <S.NavigationButton onClick={() => onNavigate('project')}>
+                <S.NavigationButton onClick={() => { setOpen(false); onNavigate('career'); }}>
+                    Career
+                </S.NavigationButton>
+                <S.NavigationButton onClick={() => { setOpen(false); onNavigate('project'); }}>
                     Project
                 </S.NavigationButton>
             </S.NavigationMenu>

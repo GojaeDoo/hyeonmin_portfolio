@@ -2,12 +2,11 @@ export interface Skill {
     id: number;
     name: string;
     icon: string;
-    category: string;
     level: number; // 1-5 레벨
 }
 
 export interface SkillCategory {
-    id: string;
+    id: number;
     title: string;
     skills: Skill[];
 }

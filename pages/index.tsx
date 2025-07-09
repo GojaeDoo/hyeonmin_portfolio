@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import Intro from './intro/page'
-import AboutContainer from '../src/components/about/About.container'
-import SkillsContainer from '../src/components/skills/Skills.container'
-
+import About from './about/page'
+import Skills from './skills/page'
+import Career from './career/page'
+import Project from './project/page'
 export default function Home() {
   return (
     <>
@@ -14,8 +15,10 @@ export default function Home() {
       </Head>
       <main>
         <Intro />
-        <AboutContainer />
-        <SkillsContainer />
+        <About />
+        <Skills />
+        <Career />
+        <Project />
       </main>
     </>
   )

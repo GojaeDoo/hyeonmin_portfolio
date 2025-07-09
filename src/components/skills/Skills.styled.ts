@@ -60,7 +60,8 @@ export const SkillsTitle = styled.h2`
     font-weight: 700;
     color: #f5f5f5;
     text-align: center;
-    margin-bottom: 1rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
     font-family: 'Orbitron', 'Rajdhani', sans-serif;
     
     @media (max-width: 768px) {

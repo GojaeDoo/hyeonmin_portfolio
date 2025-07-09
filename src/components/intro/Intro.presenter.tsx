@@ -6,14 +6,14 @@ export const IntroPresenter = () => {
             <S.Background>
                 <S.ContentWrapper>
                     <S.IntroBigText 
-                        animation="left" 
-                        position="top-left"
+                        $animation="left" 
+                        $position="top-left"
                     >
                         HYEONMIN
                     </S.IntroBigText>
                     <S.IntroBigText 
-                        animation="right" 
-                        position="middle-right"
+                        $animation="right" 
+                        $position="middle-right"
                     >
                         PORTFOLIO
                     </S.IntroBigText>
