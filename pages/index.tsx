@@ -1,5 +1,7 @@
 import Head from 'next/head'
 import Intro from './intro/page'
+import AboutContainer from '../src/components/about/About.container'
+import SkillsContainer from '../src/components/skills/Skills.container'
 
 export default function Home() {
   return (
@@ -8,10 +10,12 @@ export default function Home() {
         <title>최현민 | 포트폴리오</title>
         <meta name="description" content="현민의 포트폴리오입니다" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.jpg" />
       </Head>
       <main>
         <Intro />
+        <AboutContainer />
+        <SkillsContainer />
       </main>
     </>
   )
