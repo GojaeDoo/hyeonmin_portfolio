@@ -584,6 +584,9 @@ export const FeaturesList = styled.ul`
 export const FeatureItem = styled.li`
     font-size: 1rem;
     color: #d0d0d0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
     line-height: 1.5;
     margin-bottom: 8px;
     padding-left: 20px;
