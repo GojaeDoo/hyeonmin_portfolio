@@ -48,6 +48,7 @@ const projects: ProjectData[] = [
         techStack: ['HTML5', 'CSS3', 'JavaScript', 'React', 'TypeScript', 'Next.js', 'Styled-Components'],
         image: '/images/project/myWeb.png',
         githubLink: 'https://github.com/GojaeDoo/hyeonmin_portfolio',
+        demoLink: 'https://hyeonmin-portfolio.vercel.app/',
         features: [
             '반응형 웹 디자인',
             '스크롤 기반 애니메이션',
