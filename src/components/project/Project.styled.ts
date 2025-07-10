@@ -41,6 +41,7 @@ export const ProjectGrid = styled.div`
     max-width: 1000px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    cursor: pointer;
     gap: 36px;
     @media (max-width: 600px) {
         grid-template-columns: 1fr;
@@ -48,7 +49,9 @@ export const ProjectGrid = styled.div`
     }
 `;
 
-export const ProjectCard = styled.div<{ animate?: boolean; delay?: number }>`
+export const ProjectCard = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'animate' && prop !== 'delay'
+})<{ animate?: boolean; delay?: number }>`
     background: #232323;
     border-radius: 18px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.12);
@@ -58,18 +61,32 @@ export const ProjectCard = styled.div<{ animate?: boolean; delay?: number }>`
     align-items: flex-start;
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 0.5s, transform 0.5s;
+    transition: opacity 0.5s, transform 0.5s, filter 0.3s ease, transform 0.3s ease;
+    filter: blur(2px);
+    transform: translateY(40px) scale(0.98);
+    
     ${({ animate, delay }) =>
       animate && css`
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(0.98);
         animation: ${fadeInUp} 0.7s cubic-bezier(0.23, 1, 0.32, 1) both;
         animation-delay: ${delay || 0}s;
       `}
+    
+    &:hover {
+        filter: blur(0px);
+        transform: translateY(0) scale(1);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    
     @media (max-width: 600px) {
         padding: 16px 10px 12px 10px;
         border-radius: 10px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        
+        &:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
     }
 `;
 
@@ -134,7 +151,467 @@ export const ProjectLink = styled.a`
     color: #7ecfff;
     font-size: 1rem;
     text-decoration: underline;
+    cursor: pointer;
     &:hover {
         color: #4db3fa;
+    }
+`;
+
+// 모달 관련 스타일
+export const ModalOverlay = styled.div<{ isOpen: boolean }>`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(4px);
+`;
+
+export const ModalContent = styled.div`
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    position: relative;
+    animation: modalFadeIn 0.3s ease-out;
+    
+    @keyframes modalFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.9) translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        width: 95%;
+        max-height: 95vh;
+        border-radius: 12px;
+    }
+    
+    @media (max-width: 480px) {
+        width: 98%;
+        max-height: 98vh;
+        border-radius: 10px;
+    }
+`;
+
+export const ModalHeader = styled.div`
+    padding: 24px 32px 16px 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    @media (max-width: 768px) {
+        padding: 20px 24px 12px 24px;
+    }
+    
+    @media (max-width: 480px) {
+        padding: 16px 20px 10px 20px;
+    }
+`;
+
+export const ModalTitle = styled.h2`
+    font-size: 2rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    margin: 0 0 8px 0;
+    font-family: 'Orbitron', 'Rajdhani', sans-serif;
+    
+    @media (max-width: 768px) {
+        font-size: 1.6rem;
+    }
+    
+    @media (max-width: 480px) {
+        font-size: 1.4rem;
+    }
+`;
+
+export const ModalPeriod = styled.div`
+    font-size: 1rem;
+    color: #b0b0b0;
+    margin-bottom: 16px;
+`;
+
+export const CloseButton = styled.button`
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #b0b0b0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    
+    &:hover {
+        color: #f5f5f5;
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    @media (max-width: 768px) {
+        top: 16px;
+        right: 16px;
+        font-size: 1.3rem;
+    }
+`;
+
+export const ModalBody = styled.div`
+    padding: 24px 32px;
+    max-height: 70vh;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: #ffffff;
+        border-radius: 4px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: #ffffff;
+        border-radius: 4px;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        background: #ffffff;
+    }
+    
+    @media (max-width: 768px) {
+        padding: 20px 24px;
+        max-height: 65vh;
+    }
+    
+    @media (max-width: 480px) {
+        padding: 16px 20px;
+        max-height: 60vh;
+    }
+`;
+
+export const ModalImage = styled.img`
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    background: #181818;
+    
+    @media (max-width: 768px) {
+        max-height: 200px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+`;
+
+export const ModalDescription = styled.p`
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    
+    @media (max-width: 768px) {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+`;
+
+export const ModalSection = styled.div`
+    margin-bottom: 24px;
+    
+    @media (max-width: 768px) {
+        margin-bottom: 20px;
+    }
+`;
+
+export const ModalSectionTitle = styled.h3`
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #f5f5f5;
+    margin-bottom: 12px;
+    font-family: 'Inter', sans-serif;
+    
+    @media (max-width: 768px) {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+`;
+
+export const ModalList = styled.ul`
+    list-style: none;
+    padding: 0;
+    margin: 0;
+`;
+
+export const ModalListItem = styled.li`
+    font-size: 1rem;
+    color: #d0d0d0;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+    
+    &::before {
+        content: '•';
+        color: #7ecfff;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+    }
+    
+    @media (max-width: 768px) {
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+    }
+`;
+
+export const ModalTechStack = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    
+    @media (max-width: 768px) {
+        margin-bottom: 20px;
+    }
+`;
+
+export const ModalTechTag = styled.span`
+    background: #333;
+    color: #fff;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-weight: 500;
+    
+    @media (max-width: 768px) {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+        border-radius: 12px;
+    }
+`;
+
+export const ModalLinks = styled.div`
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 20px;
+        padding-top: 20px;
+    }
+`;
+
+export const ModalLink = styled.a`
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #7ecfff 0%, #4db3fa 100%);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(126, 207, 255, 0.3);
+    }
+    
+    @media (max-width: 768px) {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+`;
+
+export const NotionFrame = styled.iframe`
+    width: 100%;
+    height: 70vh;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+    
+    @media (max-width: 768px) {
+        height: 60vh;
+    }
+    
+    @media (max-width: 480px) {
+        height: 50vh;
+    }
+`;
+
+export const ProjectDescription = styled.div`
+    color: #e0e0e0;
+    
+    h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #f5f5f5;
+        margin-bottom: 16px;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 24px;
+        color: #d0d0d0;
+    }
+    
+    @media (max-width: 768px) {
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+        
+        p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+    }
+`;
+
+export const TechStackSection = styled.div`
+    margin-bottom: 24px;
+    
+    h4 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #f5f5f5;
+        margin-bottom: 12px;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    @media (max-width: 768px) {
+        margin-bottom: 20px;
+        
+        h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+    }
+`;
+
+export const TechList = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+`;
+
+export const TechItem = styled.span`
+    background: #333;
+    color: #fff;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-weight: 500;
+    
+    @media (max-width: 768px) {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+        border-radius: 12px;
+    }
+`;
+
+export const ViewProjectButton = styled.button`
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+        transform: translateY(-2px);
+    }
+    
+    @media (max-width: 768px) {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+`;
+
+export const FeaturesSection = styled.div`
+    margin-bottom: 24px;
+    
+    h4 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #f5f5f5;
+        margin-bottom: 12px;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    @media (max-width: 768px) {
+        margin-bottom: 20px;
+        
+        h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+    }
+`;
+
+export const FeaturesList = styled.ul`
+    list-style: none;
+    padding: 0;
+    margin: 0;
+`;
+
+export const FeatureItem = styled.li`
+    font-size: 1rem;
+    color: #d0d0d0;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+    
+    &::before {
+        content: '•';
+        color: #7ecfff;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+    }
+    
+    @media (max-width: 768px) {
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+    }
+`;
+
+export const LinksSection = styled.div`
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+    
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
     }
 `; 

@@ -1,19 +1,19 @@
 import * as S from './About.styled'
 import { AboutPresenterProps } from './About.types'
 import Navigation from '../common/Navigation/Navigation';
-import { useState } from 'react';
 
 export const AboutPresenter = ({ 
     questions, 
     isModalOpen, 
     selectedQuestion, 
+    hoveredIndex,
     onQuestionClick, 
     onCloseModal,
+    onMouseEnter,
+    onMouseLeave,
     showNavigation,
     onNavigate
 }: AboutPresenterProps) => {
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
     return(
         <>
             <S.AboutSection>
@@ -39,8 +39,8 @@ export const AboutPresenter = ({
                             <S.QuestionContentBox 
                                 key={item.id}
                                 onClick={() => onQuestionClick(item.question)}
-                                onMouseEnter={() => setHoveredIndex(idx)}
-                                onMouseLeave={() => setHoveredIndex(null)}
+                                onMouseEnter={() => onMouseEnter(idx)}
+                                onMouseLeave={onMouseLeave}
                             >
                                 {item.question}
                                 {hoveredIndex === idx && (

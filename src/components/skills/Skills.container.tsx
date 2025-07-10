@@ -10,13 +10,13 @@ export const SkillsContainer = () => {
             id: 1,
             title: "Frontend",
             skills: [
-                { id: 1, name: "HTML5", level: 5, icon: "/images/icon/HTML.svg" },
-                { id: 2, name: "CSS3", level: 5, icon: "/images/icon/CSS.svg" },
-                { id: 3, name: "JavaScript", level: 5, icon: "/images/icon/JavaScript.svg" },
-                { id: 4, name: "TypeScript", level: 4, icon: "/images/icon/TypeScript.svg" },
-                { id: 5, name: "React", level: 5, icon: "/images/icon/React.svg" },
-                { id: 6, name: "Next.js", level: 4, icon: "/images/icon/NextJS-Light.svg" },
-                { id: 7, name: "Redux", level: 4, icon: "/images/icon/Redux.svg" },
+                { id: 1, name: "HTML5", level: 4, icon: "/images/icon/HTML.svg" },
+                { id: 2, name: "CSS3", level: 3, icon: "/images/icon/CSS.svg" },
+                { id: 3, name: "JavaScript", level: 3, icon: "/images/icon/JavaScript.svg" },
+                { id: 4, name: "TypeScript", level: 3, icon: "/images/icon/TypeScript.svg" },
+                { id: 5, name: "React", level: 3, icon: "/images/icon/React.svg" },
+                { id: 6, name: "Next.js", level: 3, icon: "/images/icon/NextJS-Light.svg" },
+                { id: 7, name: "Redux", level: 3, icon: "/images/icon/Redux.svg" },
                 { id: 8, name: "Styled Components", level: 4, icon: "/images/icon/StyledComponents.svg" }
             ]
         },
@@ -24,7 +24,7 @@ export const SkillsContainer = () => {
             id: 2,
             title: "Backend",
             skills: [
-                { id: 9, name: "Node.js", level: 3, icon: "/images/icon/NodeJS.svg" },
+                { id: 9, name: "Node.js", level: 2, icon: "/images/icon/NodeJS.svg" },
                 { id: 10, name: "PostgreSQL", level: 3, icon: "/images/icon/PostgreSQL-Light.svg" },
                 { id: 11, name: "GraphQL", level: 3, icon: "/images/icon/GraphQL-Light.svg" }
             ]
@@ -33,12 +33,12 @@ export const SkillsContainer = () => {
             id: 3,
             title: "Tools",
             skills: [
-                { id: 12, name: "Git", level: 4, icon: "/images/icon/Git.svg" },
-                { id: 13, name: "GitHub", level: 4, icon: "/images/icon/Github-Light.svg" },
-                { id: 14, name: "VS Code", level: 5, icon: "/images/icon/VSCode.svg" },
-                { id: 15, name: "Figma", level: 3, icon: "/images/icon/Figma.png" },
+                { id: 12, name: "Git", level: 3, icon: "/images/icon/Git.svg" },
+                { id: 13, name: "GitHub", level: 3, icon: "/images/icon/Github-Light.svg" },
+                { id: 14, name: "VS Code", level: 4, icon: "/images/icon/VSCode.svg" },
+                { id: 15, name: "Figma", level: 2, icon: "/images/icon/Figma.png" },
                 { id: 16, name: "Postman", level: 3, icon: "/images/icon/Postman.svg" },
-                { id: 17, name: "Axios", level: 4, icon: "/images/icon/Azios.svg" }
+                { id: 17, name: "Axios", level: 3, icon: "/images/icon/Azios.svg" }
             ]
         }
     ];

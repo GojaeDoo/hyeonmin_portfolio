@@ -12,7 +12,7 @@ const careers: CareerData[] = [
         tags: ['HTML', 'CSS', 'JavaScript', 'Java', 'JSP', 'Spring', 'React','MySQL', 'AWS', 'Git','GitHub' ],
         details: [
             {
-                title: 'JAVA 개발자 양성과정(클라우드기반 AI대화형 서비스 웹개발자 양성',
+                title: 'JAVA 기반 풀스택 웹개발자 양성과정 수료',
                 period: '2023.12 ~ 2024.07 (6.5개월)'
             }
         ]

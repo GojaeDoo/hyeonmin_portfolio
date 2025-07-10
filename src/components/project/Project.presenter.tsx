@@ -1,44 +1,19 @@
 import * as S from './Project.styled';
 import { ProjectPresenterProps } from './Project.types';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import Navigation from '../common/Navigation/Navigation';
+import ProjectModalContainer from './ProjectModal.container';
 
-export const ProjectPresenter = ({ projects }: ProjectPresenterProps) => {
+export const ProjectPresenter: React.FC<ProjectPresenterProps> = ({ 
+    projects, 
+    visible, 
+    selectedProject, 
+    isModalOpen, 
+    onProjectClick, 
+    onCloseModal, 
+    onNavigate 
+}) => {
     const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-    const [visible, setVisible] = useState<boolean[]>(Array(projects.length).fill(false));
-
-    useEffect(() => {
-        const observers: IntersectionObserver[] = [];
-        cardRefs.current.forEach((el, idx) => {
-            if (!el) return;
-            const observer = new window.IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        setVisible(prev => {
-                            const updated = [...prev];
-                            updated[idx] = true;
-                            return updated;
-                        });
-                        observer.disconnect();
-                    }
-                },
-                { threshold: 0.2 }
-            );
-            observer.observe(el);
-            observers.push(observer);
-        });
-        return () => { observers.forEach(o => o.disconnect()); };
-    }, [projects.length]);
-
-    // 네비게이션 항상 표시, 이동
-    const showNavigation = true;
-    const handleNavigate = (section: string) => {
-        const sectionId = section === 'about' ? 'about' : section === 'skill' ? 'skills' : section;
-        const el = document.getElementById(sectionId);
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
 
     return (
         <S.ProjectSection id="project">
@@ -50,6 +25,7 @@ export const ProjectPresenter = ({ projects }: ProjectPresenterProps) => {
                         ref={el => (cardRefs.current[idx] = el)}
                         animate={visible[idx]}
                         delay={0.1 * idx}
+                        data-project-card
                     >
                         {project.image && <S.ProjectImage src={project.image} alt={project.title + ' 이미지'} />}
                         <S.ProjectTitleText>{project.title}</S.ProjectTitleText>
@@ -60,15 +36,19 @@ export const ProjectPresenter = ({ projects }: ProjectPresenterProps) => {
                                 <S.TechStack key={tech}>{tech}</S.TechStack>
                             ))}
                         </S.TechStackList>
-                        {project.link && (
-                            <S.ProjectLink href={project.link} target="_blank" rel="noopener noreferrer">
-                                더보기
-                            </S.ProjectLink>
-                        )}
+                        <S.ProjectLink onClick={() => onProjectClick(project)}>
+                            더보기
+                        </S.ProjectLink>
                     </S.ProjectCard>
                 ))}
             </S.ProjectGrid>
-            <Navigation isVisible={showNavigation} onNavigate={handleNavigate} />
+            <Navigation isVisible={true} onNavigate={onNavigate} />
+            
+            <ProjectModalContainer
+                project={selectedProject}
+                isOpen={isModalOpen}
+                onClose={onCloseModal}
+            />
         </S.ProjectSection>
     );
 };

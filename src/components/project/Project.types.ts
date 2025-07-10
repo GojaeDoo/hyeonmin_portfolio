@@ -4,9 +4,26 @@ export interface ProjectData {
     description: string;
     techStack: string[];
     image?: string;
-    link?: string;
+    detailedDescription?: string;
+    features?: string[];
+    challenges?: string[];
+    solutions?: string[];
+    githubLink?: string;
+    demoLink?: string;
 }
 
 export interface ProjectPresenterProps {
     projects: ProjectData[];
-} 
+    visible: boolean[];
+    selectedProject: ProjectData | null;
+    isModalOpen: boolean;
+    onProjectClick: (project: ProjectData) => void;
+    onCloseModal: () => void;
+    onNavigate: (section: string) => void;
+}
+
+export interface ProjectContainerProps {
+    // 컨테이너는 외부에서 받을 props가 없음
+}
+
+ 
