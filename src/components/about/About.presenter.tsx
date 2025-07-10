@@ -1,6 +1,8 @@
+import React from 'react';
+import Image from 'next/image';
 import * as S from './About.styled'
 import { AboutPresenterProps } from './About.types'
-import Navigation from '../common/Navigation/Navigation';
+import { FaGithub, FaEnvelope, FaPhone } from 'react-icons/fa';
 
 export const AboutPresenter = ({ 
     questions, 
@@ -11,24 +13,68 @@ export const AboutPresenter = ({
     onCloseModal,
     onMouseEnter,
     onMouseLeave,
-    showNavigation,
-    onNavigate
+    hoveredIcon,
+    onIconMouseEnter,
+    onIconMouseLeave
 }: AboutPresenterProps) => {
     return(
         <>
             <S.AboutSection>
                 <S.AboutContent>
                     <S.LeftSection>
-                        <S.ProfileImage src="/images/MyImage.jpg" alt="최현민 프로필" />
+                        <S.ProfileImage>
+                            <Image 
+                                src="/images/MyImage.jpg" 
+                                alt="최현민 프로필" 
+                                width={300} 
+                                height={300}
+                                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                                priority
+                            />
+                        </S.ProfileImage>
                     </S.LeftSection>
                     <S.RightSection>
                         <S.AboutTitle>About Me</S.AboutTitle>
                         <S.AboutDescription>
-                            안녕하세요! 저는 프론트엔드 개발자 최현민입니다.
-                            사용자 경험을 중요시하며, 깔끔하고 효율적인 코드를 작성하는 것을 좋아합니다.
-                            React, TypeScript, Next.js 등의 기술 스택을 활용하여 
-                            현대적이고 반응형 웹 애플리케이션을 개발하고 있습니다.
+                            안녕하세요! 프론트엔드 개발자 최현민입니다.
+                            <br />
+                            최고의 개발자가 되기 위해 끈질기게 노력하겠습니다!
                         </S.AboutDescription>
+                        <S.AboutIconsContainer>
+                            <S.AboutIcon
+                                onMouseEnter={() => onIconMouseEnter('github')}
+                                onMouseLeave={onIconMouseLeave}
+                            >
+                                {React.createElement(FaGithub as any, { size: 36, color: "#ffffff" })}
+                                {hoveredIcon === 'github' && (
+                                    <S.IconTooltip className="visible">
+                                        <a href="https://github.com/GojaeDoo" target="_blank">GitHub 프로필 보기</a>
+                                    </S.IconTooltip>
+                                )}
+                            </S.AboutIcon>
+                            <S.AboutIcon
+                                onMouseEnter={() => onIconMouseEnter('email')}
+                                onMouseLeave={onIconMouseLeave}
+                            >
+                                {React.createElement(FaEnvelope as any, { size: 36, color: "#ffffff" })}
+                                {hoveredIcon === 'email' && (
+                                    <S.IconTooltip className="visible">
+                                        minchoi9979@naver.com
+                                    </S.IconTooltip>
+                                )}
+                            </S.AboutIcon>
+                            <S.AboutIcon
+                                onMouseEnter={() => onIconMouseEnter('phone')}
+                                onMouseLeave={onIconMouseLeave}
+                            >
+                                {React.createElement(FaPhone as any, { size: 36, color: "#ffffff" })}
+                                {hoveredIcon === 'phone' && (
+                                    <S.IconTooltip className="visible">
+                                        010-8623-0775
+                                    </S.IconTooltip>
+                                )}
+                            </S.AboutIcon>
+                        </S.AboutIconsContainer>
                     </S.RightSection>
                 </S.AboutContent>
                 
@@ -66,10 +112,7 @@ export const AboutPresenter = ({
                 )}
             </S.AboutSection>
 
-            <Navigation 
-                isVisible={showNavigation} 
-                onNavigate={onNavigate}
-            />
+
         </>
     )
 }

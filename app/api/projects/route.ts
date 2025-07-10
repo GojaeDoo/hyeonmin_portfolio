@@ -1,16 +1,12 @@
-'use client'
+import { NextResponse } from 'next/server';
 
-import React, { useEffect, useState } from 'react';
-import ProjectPresenter from './Project.presenter';
-import { ProjectData, ProjectContainerProps } from './Project.types';
-
-const projects: ProjectData[] = [
+const projects = [
     {
         title: 'Jeju Trevel (학원 1차 팀 프로젝트)',
         period: '2024.04 ~ 2024.05',
         description: '제주도 여행 웹사이트',
         detailedDescription: '제주 여행 일정을 편리한 인터페이스와 최신 데이터를 기반으로 쉽고 간편하게 계획할수 있는 플래너 서비스 및 정보제공 사이트를 만들었습니다.',
-        techStack: ['JAVA', 'JSP', 'HTML5', 'CSS3', 'Javascript', 'SQL', 'JQuery (Ajax)' ],
+        techStack: ['JAVA', 'JSP', 'HTML5', 'CSS3', 'Javascript', 'SQL', 'JQuery (Ajax)'],
         image: '/images/project/JejuTravel.png',
         githubLink: 'https://github.com/GojaeDoo/MVC_Project_Jeju',
         features: [
@@ -26,7 +22,7 @@ const projects: ProjectData[] = [
         period: '2024.06 ~ 2024.08',
         description: '영화 OTT 웹사이트',
         detailedDescription: 'AI 알고리즘을 활용한 영화 OTT 사이트입니다.',
-        techStack: ['HTML5', 'CSS3', 'Javascript', 'React', 'Next.js', 'Axios', 'MUI' , 'Styled-Components' ],
+        techStack: ['HTML5', 'CSS3', 'Javascript', 'React', 'Next.js', 'Axios', 'MUI', 'Styled-Components'],
         image: '/images/project/Pretzel.png',
         githubLink: 'https://github.com/GojaeDoo/Pretzel',
         features: [
@@ -62,7 +58,7 @@ const projects: ProjectData[] = [
         period: '2025.03 ~ 2025.07',
         description: '코디 공유 웹사이트',
         detailedDescription: '패션 코디를 공유하고 소통할 수 있는 소셜 플랫폼입니다. 풀스택 개발을 통해 프론트엔드와 백엔드를 모두 구현했습니다.',
-        techStack: ['HTML5', 'CSS3', 'JavaScript', 'React', 'TypeScript', 'Next.js', 'Styled-Components' , 'Axios' , 'Node.js' , 'Express', 'PostgreSQL' , 'Vercel' , 'Render' , 'Supabase'],
+        techStack: ['HTML5', 'CSS3', 'JavaScript', 'React', 'TypeScript', 'Next.js', 'Styled-Components', 'Axios', 'Node.js', 'Express', 'PostgreSQL', 'Vercel', 'Render', 'Supabase'],
         image: '/images/project/CodiDrip.png',
         githubLink: 'https://github.com/GojaeDoo/CodiDrip',
         demoLink: 'https://codi-drip-frontend.vercel.app',
@@ -84,67 +80,6 @@ const projects: ProjectData[] = [
     }
 ];
 
-export const ProjectContainer: React.FC<ProjectContainerProps> = () => {
-    const [visible, setVisible] = useState<boolean[]>(Array(projects.length).fill(false));
-    const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    useEffect(() => {
-        const observers: IntersectionObserver[] = [];
-        const projectCards = document.querySelectorAll('[data-project-card]');
-        
-        projectCards.forEach((el, idx) => {
-            const observer = new window.IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        setVisible(prev => {
-                            const updated = [...prev];
-                            updated[idx] = true;
-                            return updated;
-                        });
-                        observer.disconnect();
-                    }
-                },
-                { threshold: 0.2 }
-            );
-            observer.observe(el);
-            observers.push(observer);
-        });
-
-        return () => { 
-            observers.forEach(o => o.disconnect()); 
-        };
-    }, []);
-
-    const handleProjectClick = (project: ProjectData) => {
-        setSelectedProject(project);
-        setIsModalOpen(true);
-    };
-
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-        setSelectedProject(null);
-    };
-
-    const handleNavigate = (section: string) => {
-        const sectionId = section === 'about' ? 'about' : section === 'skill' ? 'skills' : section;
-        const el = document.getElementById(sectionId);
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
-    return (
-        <ProjectPresenter
-            projects={projects}
-            visible={visible}
-            selectedProject={selectedProject}
-            isModalOpen={isModalOpen}
-            onProjectClick={handleProjectClick}
-            onCloseModal={handleCloseModal}
-            onNavigate={handleNavigate}
-        />
-    );
-};
-
-export default ProjectContainer; 
+export async function GET() {
+    return NextResponse.json({ projects });
+} 

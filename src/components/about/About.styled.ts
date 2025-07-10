@@ -329,11 +329,10 @@ export const RightSection = styled.div`
     }
 `;
 
-export const ProfileImage = styled.img`
+export const ProfileImage = styled.div`
     width: 300px;
     height: 300px;
     border-radius: 12px;
-    object-fit: cover;
     border: 4px solid #f5f5f5;
     box-shadow: 
         0 15px 45px rgba(0, 0, 0, 0.4),
@@ -343,6 +342,7 @@ export const ProfileImage = styled.img`
         inset 0 -1px 2px rgba(0, 0, 0, 0.1);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform: perspective(1200px) rotateY(-15deg) rotateX(10deg) translateZ(20px);
+    overflow: hidden;
     
     &:hover {
         transform: perspective(1200px) rotateY(-8deg) rotateX(5deg) translateZ(30px) scale(1.05);
@@ -409,5 +409,69 @@ export const AboutDescription = styled.p`
     @media (max-width: 480px) {
         font-size: 1rem;
         line-height: 1.6;
+    }
+`;
+
+export const AboutIconsContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 2rem;
+`;
+
+export const AboutIcon = styled.div`
+    width: 36px;
+    height: 36px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    
+    &:hover {
+        transform: scale(1.1);
+    }
+    
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+`;
+
+export const IconTooltip = styled.div`
+    position: absolute;
+    bottom: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid rgba(0, 0, 0, 0.9);
+    }
+    
+    &.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(-5px);
     }
 `;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import * as S from './Project.styled';
 import { ProjectModalPresenterProps } from './ProjectModal.types';
 
@@ -7,36 +7,12 @@ export const ProjectModalPresenter: React.FC<ProjectModalPresenterProps> = ({
     isOpen, 
     onClose, 
     onGithubClick, 
-    onDemoClick 
+    onDemoClick,
+    onOverlayClick
 }) => {
-    useEffect(() => {
-        const handleEscape = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') {
-                onClose();
-            }
-        };
-
-        if (isOpen) {
-            document.addEventListener('keydown', handleEscape);
-            document.body.style.overflow = 'hidden';
-        }
-
-        return () => {
-            document.removeEventListener('keydown', handleEscape);
-            document.body.style.overflow = 'unset';
-        };
-    }, [isOpen, onClose]);
-
-    if (!project) return null;
-
-    const handleOverlayClick = (e: React.MouseEvent) => {
-        if (e.target === e.currentTarget) {
-            onClose();
-        }
-    };
 
     return (
-        <S.ModalOverlay isOpen={isOpen} onClick={handleOverlayClick}>
+        <S.ModalOverlay isOpen={isOpen} onClick={onOverlayClick}>
             <S.ModalContent>
                 <S.CloseButton onClick={onClose}>×</S.CloseButton>
                 
@@ -62,7 +38,7 @@ export const ProjectModalPresenter: React.FC<ProjectModalPresenterProps> = ({
 
                         {project.features && project.features.length > 0 && (
                             <S.FeaturesSection>
-                                <h4>주요 기능</h4>
+                                <h4>담당 기능</h4>
                                 <S.FeaturesList>
                                     {project.features.map((feature, index) => (
                                         <S.FeatureItem key={index}>{feature}</S.FeatureItem>

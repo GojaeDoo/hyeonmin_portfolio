@@ -1,35 +1,8 @@
 import * as S from './Career.styled'
 import { CareerPresenterProps } from './Career.types';
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
-export const CareerPresenter = ({ careers }: CareerPresenterProps) => {
-    const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
-    const [visible, setVisible] = useState<boolean[]>(Array(careers.length).fill(false));
-
-    useEffect(() => {
-        const observers: IntersectionObserver[] = [];
-        rowRefs.current.forEach((el, idx) => {
-            if (!el) return;
-            const observer = new window.IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        setVisible(prev => {
-                            const updated = [...prev];
-                            updated[idx] = true;
-                            return updated;
-                        });
-                        observer.disconnect();
-                    }
-                },
-                { threshold: 0.2 }
-            );
-            observer.observe(el);
-            observers.push(observer);
-        });
-        return () => {
-            observers.forEach(o => o.disconnect());
-        };
-    }, [careers.length]);
+export const CareerPresenter = ({ careers, visible, rowRefs }: CareerPresenterProps) => {
 
     return(
         <>

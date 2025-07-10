@@ -14,4 +14,6 @@ export interface CareerData {
 
 export interface CareerPresenterProps {
     careers: CareerData[];
+    visible: boolean[];
+    rowRefs: React.MutableRefObject<(HTMLDivElement | null)[]>;
 }

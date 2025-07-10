@@ -23,7 +23,5 @@ export interface ProjectPresenterProps {
 }
 
 export interface ProjectContainerProps {
-    // 컨테이너는 외부에서 받을 props가 없음
+    // 빈 인터페이스
 }
-
- 

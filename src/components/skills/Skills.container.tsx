@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react';
 import SkillsPresenter from "./Skills.presenter";
 import { SkillCategory } from './Skills.types';

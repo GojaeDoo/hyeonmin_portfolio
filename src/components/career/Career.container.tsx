@@ -1,7 +1,8 @@
-import { useState } from 'react';
+'use client'
+
 import { CareerPresenter } from "./Career.presenter";
 import { CareerData } from './Career.types';
-import Navigation from '../common/Navigation/Navigation';
+import { useEffect, useRef, useState } from 'react';
 
 const careers: CareerData[] = [
     {
@@ -59,19 +60,41 @@ const careers: CareerData[] = [
 ];
 
 export const CareerContainer = () => {
-    // 항상 네비게이션 보이게
-    const showNavigation = true;
-    const handleNavigate = (section: string) => {
-        const sectionId = section === 'about' ? 'about' : section === 'skill' ? 'skills' : section;
-        const el = document.getElementById(sectionId);
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
+    const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const [visible, setVisible] = useState<boolean[]>(Array(careers.length).fill(false));
+
+    useEffect(() => {
+        const observers: IntersectionObserver[] = [];
+        rowRefs.current.forEach((el, idx) => {
+            if (!el) return;
+            const observer = new window.IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting) {
+                        setVisible(prev => {
+                            const updated = [...prev];
+                            updated[idx] = true;
+                            return updated;
+                        });
+                        observer.disconnect();
+                    }
+                },
+                { threshold: 0.2 }
+            );
+            observer.observe(el);
+            observers.push(observer);
+        });
+        return () => {
+            observers.forEach(o => o.disconnect());
+        };
+    }, [careers.length]);
+
     return(
         <div id="career">
-            <CareerPresenter careers={careers} />
-            <Navigation isVisible={showNavigation} onNavigate={handleNavigate} />
+            <CareerPresenter 
+                careers={careers} 
+                visible={visible}
+                rowRefs={rowRefs}
+            />
         </div>
     )
 }

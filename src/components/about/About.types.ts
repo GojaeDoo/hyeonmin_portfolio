@@ -13,6 +13,7 @@ export interface AboutPresenterProps {
     onCloseModal: () => void;
     onMouseEnter: (index: number) => void;
     onMouseLeave: () => void;
-    showNavigation: boolean;
-    onNavigate: (section: string) => void;
+    hoveredIcon: string | null;
+    onIconMouseEnter: (iconName: string) => void;
+    onIconMouseLeave: () => void;
 }
