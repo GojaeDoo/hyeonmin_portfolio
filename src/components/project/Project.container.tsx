@@ -6,59 +6,6 @@ import { ProjectData, ProjectContainerProps } from './Project.types';
 
 const projects: ProjectData[] = [
     {
-        title: 'Jeju Trevel (학원 1차 팀 프로젝트)',
-        period: '2024.04 ~ 2024.05',
-        description: '제주도 여행 웹사이트',
-        detailedDescription: '제주 여행 일정을 편리한 인터페이스와 최신 데이터를 기반으로 쉽고 간편하게 계획할수 있는 플래너 서비스 및 정보제공 사이트를 만들었습니다.',
-        techStack: ['JAVA', 'JSP', 'HTML5', 'CSS3', 'Javascript', 'SQL', 'JQuery (Ajax)' ],
-        image: '/images/project/JejuTravel.png',
-        githubLink: 'https://github.com/GojaeDoo/MVC_Project_Jeju',
-        features: [
-            '정렬 기능 구현',
-            '카카오 지도 API 활용 / 장소 위치 및 정보 제공',
-            '카테고리 페이지 디자인 및 서버 구축',
-            '검색 기능 구현',
-            '리뷰 페이지 디자인 및 서버 구축'
-        ]
-    },
-    {
-        title: 'Pretzel (학원 2차 팀 프로젝트)',
-        period: '2024.06 ~ 2024.08',
-        description: '영화 OTT 웹사이트',
-        detailedDescription: 'AI 알고리즘을 활용한 영화 OTT 사이트입니다.',
-        techStack: ['HTML5', 'CSS3', 'Javascript', 'React', 'Next.js', 'Axios', 'MUI' , 'Styled-Components' ],
-        image: '/images/project/Pretzel.png',
-        githubLink: 'https://github.com/GojaeDoo/Pretzel',
-        features: [
-            '메인 페이지 (화면 구현 및 데이터 연동)',
-            '회원가입 및 로그인 (화면 구현 및 데이터 연동)',
-            '카카오 & 네이버 아이디 로그인 연동',
-            '검색 및 검색 결과 페이지 구현 (화면 구현 및 데이터 연동)',
-            'FAQ 페이지 (화면 구현 및 데이터 연동)',
-            '문의 페이지 (화면 구현 및 데이터 연동)',
-            '프로필 페이지(화면 구현 및 데이터 연동)',
-            '공지사항 페이지(화면 구현 및 데이터 연동)'
-        ]
-    },
-    {
-        title: '포트폴리오 웹 사이트 (개인 프로젝트)',
-        period: '2025.06 ~ 2025.07',
-        description: '개인 포트폴리오 웹사이트',
-        detailedDescription: '개인 포트폴리오를 위한 반응형 웹사이트입니다. TypeScript와 Next.js를 활용하여 개발했으며, 애니메이션과 인터랙티브한 요소들을 포함하고 있습니다.',
-        techStack: ['HTML5', 'CSS3', 'JavaScript', 'React', 'TypeScript', 'Next.js', 'Styled-Components'],
-        image: '/images/project/myWeb.png',
-        githubLink: 'https://github.com/GojaeDoo/hyeonmin_portfolio',
-        demoLink: 'https://hyeonmin-portfolio.vercel.app/',
-        features: [
-            '반응형 웹 디자인',
-            '스크롤 기반 애니메이션',
-            '인터랙티브 네비게이션',
-            '프로젝트 모달 시스템',
-            '다크 테마 디자인',
-            '모달 시스템',
-        ]
-    },
-    {
         title: 'CODIDRIP (개인프로젝트)',
         period: '2025.03 ~ 2025.07',
         description: '코디 공유 웹사이트',
@@ -81,6 +28,24 @@ const projects: ProjectData[] = [
             '테마 시스템 (다크 / 라이트)',
             '스켈레톤 로딩',
             '모달 시스템'
+        ]
+    },
+    {
+        title: '포트폴리오 웹 사이트 (개인 프로젝트)',
+        period: '2025.06 ~ 2025.07',
+        description: '개인 포트폴리오 웹사이트',
+        detailedDescription: '개인 포트폴리오를 위한 반응형 웹사이트입니다. TypeScript와 Next.js를 활용하여 개발했으며, 애니메이션과 인터랙티브한 요소들을 포함하고 있습니다.',
+        techStack: ['HTML5', 'CSS3', 'JavaScript', 'React', 'TypeScript', 'Next.js', 'Styled-Components'],
+        image: '/images/project/myWeb.png',
+        githubLink: 'https://github.com/GojaeDoo/hyeonmin_portfolio',
+        demoLink: 'https://hyeonmin-portfolio.vercel.app/',
+        features: [
+            '반응형 웹 디자인',
+            '스크롤 기반 애니메이션',
+            '인터랙티브 네비게이션',
+            '프로젝트 모달 시스템',
+            '다크 테마 디자인',
+            '모달 시스템',
         ]
     }
 ];
