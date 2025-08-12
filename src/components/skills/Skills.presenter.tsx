@@ -2,7 +2,7 @@ import * as S from './Skills.styled';
 import { SkillsPresenterProps } from './Skills.types';
 import Navigation from '../common/Navigation/Navigation';
 
-export const SkillsPresenter = ({ skillCategories, showNavigation, onNavigate, renderLevelDots, handleImageError }: SkillsPresenterProps) => {
+export const SkillsPresenter = ({ skillCategories, showNavigation, onNavigate, handleImageError }: SkillsPresenterProps) => {
     return (
         <>
             <S.SkillsSection>
@@ -21,9 +21,6 @@ export const SkillsPresenter = ({ skillCategories, showNavigation, onNavigate, r
                                                 onError={handleImageError}
                                             />
                                             <S.SkillName>{skill.name}</S.SkillName>
-                                            <S.SkillLevel>
-                                                {renderLevelDots(skill.level)}
-                                            </S.SkillLevel>
                                         </S.SkillItem>
                                     ))}
                                 </S.SkillsList>

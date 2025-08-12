@@ -21,19 +21,7 @@ export const AboutPresenter = ({
         <>
             <S.AboutSection>
                 <S.AboutContent>
-                    <S.LeftSection>
-                        <S.ProfileImage>
-                            <Image 
-                                src="/images/MyImage.jpg" 
-                                alt="최현민 프로필" 
-                                width={300} 
-                                height={300}
-                                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                                priority
-                            />
-                        </S.ProfileImage>
-                    </S.LeftSection>
-                    <S.RightSection>
+                    <S.ContentSection>
                         <S.AboutTitle>About Me</S.AboutTitle>
                         <S.AboutDescription>
                             안녕하세요! 프론트엔드 개발자 최현민입니다.
@@ -75,7 +63,7 @@ export const AboutPresenter = ({
                                 )}
                             </S.AboutIcon>
                         </S.AboutIconsContainer>
-                    </S.RightSection>
+                    </S.ContentSection>
                 </S.AboutContent>
                 
                 <S.QuestionSection>

@@ -308,72 +308,12 @@ export const ModalBody = styled.div`
     }
 `;
 
-export const LeftSection = styled.div`
-    flex: 0 0 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    @media (max-width: 768px) {
-        flex: none;
-        width: 100%;
-    }
-`;
-
-export const RightSection = styled.div`
+export const ContentSection = styled.div`
     flex: 1;
-    max-width: 600px;
+    max-width: 100%;
     
     @media (max-width: 768px) {
         max-width: 100%;
-    }
-`;
-
-export const ProfileImage = styled.div`
-    width: 300px;
-    height: 300px;
-    border-radius: 12px;
-    border: 4px solid #f5f5f5;
-    box-shadow: 
-        0 15px 45px rgba(0, 0, 0, 0.4),
-        0 8px 16px rgba(0, 0, 0, 0.3),
-        0 4px 8px rgba(0, 0, 0, 0.2),
-        inset 0 2px 4px rgba(255, 255, 255, 0.1),
-        inset 0 -1px 2px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    transform: perspective(1200px) rotateY(-15deg) rotateX(10deg) translateZ(20px);
-    overflow: hidden;
-    
-    &:hover {
-        transform: perspective(1200px) rotateY(-8deg) rotateX(5deg) translateZ(30px) scale(1.05);
-        box-shadow: 
-            0 25px 60px rgba(0, 0, 0, 0.5),
-            0 12px 24px rgba(0, 0, 0, 0.4),
-            0 6px 12px rgba(0, 0, 0, 0.3),
-            inset 0 3px 6px rgba(255, 255, 255, 0.2),
-            inset 0 -2px 4px rgba(0, 0, 0, 0.2);
-    }
-    
-    @media (max-width: 768px) {
-        width: 220px;
-        height: 220px;
-        transform: perspective(1000px) rotateY(-8deg) rotateX(6deg) translateZ(10px);
-        border-width: 3px;
-        
-        &:hover {
-            transform: perspective(1000px) rotateY(-4deg) rotateX(3deg) translateZ(15px) scale(1.03);
-        }
-    }
-    
-    @media (max-width: 480px) {
-        width: 180px;
-        height: 180px;
-        transform: perspective(800px) rotateY(-6deg) rotateX(4deg) translateZ(8px);
-        border-width: 2px;
-        
-        &:hover {
-            transform: perspective(800px) rotateY(-3deg) rotateX(2deg) translateZ(12px) scale(1.02);
-        }
     }
 `;
 
