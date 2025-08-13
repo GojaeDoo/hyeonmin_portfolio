@@ -4,12 +4,16 @@ export interface ProjectData {
     description: string;
     techStack: string[];
     image?: string;
+    link?: string;
     detailedDescription?: string;
     features?: string[];
-    challenges?: string[];
-    solutions?: string[];
     githubLink?: string;
     demoLink?: string;
+    troubleShooting?: Array<{ 
+        challenge: string; 
+        solution: string; 
+        reason: string; 
+    }>;
 }
 
 export interface ProjectPresenterProps {
@@ -20,8 +24,4 @@ export interface ProjectPresenterProps {
     onProjectClick: (project: ProjectData) => void;
     onCloseModal: () => void;
     onNavigate: (section: string) => void;
-}
-
-export interface ProjectContainerProps {
-    // 빈 인터페이스
 }

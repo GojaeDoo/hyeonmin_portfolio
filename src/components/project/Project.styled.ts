@@ -158,7 +158,9 @@ export const ProjectLink = styled.a`
 `;
 
 // 모달 관련 스타일
-export const ModalOverlay = styled.div<{ isOpen: boolean }>`
+export const ModalOverlay = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isOpen'
+})<{ isOpen: boolean }>`
     position: fixed;
     top: 0;
     left: 0;
@@ -172,13 +174,28 @@ export const ModalOverlay = styled.div<{ isOpen: boolean }>`
     backdrop-filter: blur(4px);
 `;
 
+export const ModalBar = styled.div`
+    width: 100%;
+    height: 10px;
+    background: #333;
+    margin-bottom: 10px;
+`;
+
+export const ModalSubTitle = styled.h4`
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    margin-bottom: 12px;
+    font-family: 'Orbitron', 'Rajdhani', sans-serif;
+`;
+
 export const ModalContent = styled.div`
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
-    max-width: 800px;
-    width: 90%;
-    max-height: 90vh;
+    max-width: 1500px; 
+    width: 95%;
+    max-height: 90vh; 
     position: relative;
     animation: modalFadeIn 0.3s ease-out;
     
@@ -270,23 +287,22 @@ export const ModalBody = styled.div`
     padding: 24px 32px;
     max-height: 70vh;
     overflow-y: auto;
+    
     &::-webkit-scrollbar {
-        width: 8px;
+        width: 0px;
+        display: none;
     }
     
     &::-webkit-scrollbar-track {
-        background: #ffffff;
-        border-radius: 4px;
+        display: none;
     }
     
     &::-webkit-scrollbar-thumb {
-        background: #ffffff;
-        border-radius: 4px;
+        display: none;
     }
     
-    &::-webkit-scrollbar-thumb:hover {
-        background: #ffffff;
-    }
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     
     @media (max-width: 768px) {
         padding: 20px 24px;
@@ -439,19 +455,140 @@ export const ModalLink = styled.a`
     }
 `;
 
-export const NotionFrame = styled.iframe`
-    width: 100%;
-    height: 70vh;
-    border: none;
+export const TroubleShootingSection = styled.div`
+    margin : 24px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+`;
+
+export const TroubleShootingList = styled.ul`
+    list-style: none;
+    padding: 0;
+    margin: 0;
+`;
+
+export const TroubleShootingItem = styled.li`
+    font-size: 1rem;
+    color: #d0d0d0;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+`;
+
+export const ChallengeItem = styled.div`
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 0;
+    cursor: default;
+`;
+
+export const ChallengeContent = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+`;
+
+export const ChallengeText = styled.p`
+    display: flex;
+    color: #f5f5f5;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+`;
+
+export const SolutionContent = styled.div`
+    display: flex;
+    color: #7ecfff;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-left: 8px;
+    
+    &::before {
+        content: '↳ ';
+        color: #7ecfff;
+        font-weight: bold;
+        margin-right: 8px;
+    }
+`;
+
+export const ReasonContent = styled.div`
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 8px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
-    background: #fff;
+    
+    strong {
+        color: #4db3fa;
+        font-weight: 600;
+    }
+    
+    span {
+        color: #7ecfff;
+        font-weight: 500;
+    }
     
     @media (max-width: 768px) {
-        height: 60vh;
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
     }
     
     @media (max-width: 480px) {
-        height: 50vh;
+        gap: 10px;
+        padding: 14px;
+    }
+`;
+
+export const ReasonLabel = styled.div`
+    color: #4db3fa;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 90px;
+    flex-shrink: 0;
+    padding-top: 2px;
+    border-right: 2px solid #555;
+    
+    @media (max-width: 768px) {
+        min-width: auto;
+        border-right: none;
+        border-bottom: 2px solid #555;
+        padding-bottom: 8px;
+        padding-top: 0;
+        font-size: 0.85rem;
+    }
+    
+    @media (max-width: 480px) {
+        font-size: 0.8rem;
+        padding-bottom: 6px;
+    }
+`;
+
+export const ReasonText = styled.div`
+    flex: 1;
+    color: #a0a0a0;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    text-align: left;
+    
+    @media (max-width: 768px) {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    @media (max-width: 480px) {
+        font-size: 0.85rem;
     }
 `;
 
@@ -487,23 +624,15 @@ export const ProjectDescription = styled.div`
 `;
 
 export const TechStackSection = styled.div`
-    margin-bottom: 24px;
-    
-    h4 {
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: #f5f5f5;
-        margin-bottom: 12px;
-        font-family: 'Inter', sans-serif;
-    }
+    margin : 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
     
     @media (max-width: 768px) {
         margin-bottom: 20px;
-        
-        h4 {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
     }
 `;
 
@@ -555,23 +684,15 @@ export const ViewProjectButton = styled.button`
 `;
 
 export const FeaturesSection = styled.div`
-    margin-bottom: 24px;
-    
-    h4 {
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: #f5f5f5;
-        margin-bottom: 12px;
-        font-family: 'Inter', sans-serif;
-    }
+    margin : 24px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
     
     @media (max-width: 768px) {
         margin-bottom: 20px;
-        
-        h4 {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
     }
 `;
 
@@ -617,4 +738,4 @@ export const LinksSection = styled.div`
         gap: 10px;
         margin-top: 20px;
     }
-`; 
+`;

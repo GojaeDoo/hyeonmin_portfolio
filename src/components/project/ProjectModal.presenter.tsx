@@ -10,6 +10,7 @@ export const ProjectModalPresenter: React.FC<ProjectModalPresenterProps> = ({
     onDemoClick,
     onOverlayClick
 }) => {
+    if (!project) return null;
 
     return (
         <S.ModalOverlay isOpen={isOpen} onClick={onOverlayClick}>
@@ -24,21 +25,21 @@ export const ProjectModalPresenter: React.FC<ProjectModalPresenterProps> = ({
                 <S.ModalBody>
                     <S.ProjectDescription>
                         <S.ProjectImage src={project.image} alt={project.title + ' 이미지'} />
-                        <h3>프로젝트 설명</h3>
-                        <p>{project.detailedDescription || project.description}</p>
+                        <S.ModalSubTitle>프로젝트 설명</S.ModalSubTitle>
+                        <p>{project.detailedDescription}</p>
+                        <S.ModalBar />
                         
                         <S.TechStackSection>
-                            <h4>사용 기술</h4>
+                            <S.ModalSubTitle>사용 기술</S.ModalSubTitle>
                             <S.TechList>
                                 {project.techStack?.map((tech, index) => (
                                     <S.TechItem key={index}>{tech}</S.TechItem>
                                 ))}
                             </S.TechList>
                         </S.TechStackSection>
-
                         {project.features && project.features.length > 0 && (
                             <S.FeaturesSection>
-                                <h4>담당 기능</h4>
+                                <S.ModalSubTitle>주요 기능</S.ModalSubTitle>
                                 <S.FeaturesList>
                                     {project.features.map((feature, index) => (
                                         <S.FeatureItem key={index}>{feature}</S.FeatureItem>
@@ -46,7 +47,29 @@ export const ProjectModalPresenter: React.FC<ProjectModalPresenterProps> = ({
                                 </S.FeaturesList>
                             </S.FeaturesSection>
                         )}
-
+                        
+                        {project.troubleShooting && project.troubleShooting.length > 0 && (
+                            <S.TroubleShootingSection>
+                                <S.ModalSubTitle>도전 과제</S.ModalSubTitle>
+                                {project.troubleShooting.map((item, index) => (
+                                    <S.ChallengeItem key={index}>
+                                        <S.ChallengeContent>
+                                            <S.ChallengeText>{index+1}. {item.challenge}</S.ChallengeText>
+                                            <S.SolutionContent>
+                                                {item.solution}
+                                            </S.SolutionContent>
+                                            {item.reason && (
+                                                <S.ReasonContent>
+                                                    <S.ReasonLabel>채택이유</S.ReasonLabel>
+                                                    <S.ReasonText dangerouslySetInnerHTML={{ __html: item.reason }} />
+                                                </S.ReasonContent>
+                                            )}
+                                        </S.ChallengeContent>
+                                    </S.ChallengeItem>
+                                ))}
+                            </S.TroubleShootingSection>
+                        )}
+                    
                         <S.LinksSection>
                             {project.githubLink && (
                                 <S.ViewProjectButton onClick={onGithubClick}>

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import ProjectPresenter from './Project.presenter';
-import { ProjectData, ProjectContainerProps } from './Project.types';
+import { ProjectData} from './Project.types';
 
 const projects: ProjectData[] = [
     {
@@ -32,9 +32,9 @@ const projects: ProjectData[] = [
     },
     {
         title: '포트폴리오 웹 사이트 (개인 프로젝트)',
-        period: '2025.06 ~ 2025.07',
+        period: '2025.06 ~ 2025.08',
         description: '개인 포트폴리오 웹사이트',
-        detailedDescription: '개인 포트폴리오를 위한 반응형 웹사이트입니다. TypeScript와 Next.js를 활용하여 개발했으며, 애니메이션과 인터랙티브한 요소들을 포함하고 있습니다.',
+        detailedDescription: '개인 포트폴리오를 위한 반응형 웹사이트입니다. TypeScript와 Next.js를 활용하여 개발했습니다.',
         techStack: ['HTML5', 'CSS3', 'JavaScript', 'React', 'TypeScript', 'Next.js', 'Styled-Components'],
         image: '/images/project/myWeb.png',
         githubLink: 'https://github.com/GojaeDoo/hyeonmin_portfolio',
@@ -46,11 +46,38 @@ const projects: ProjectData[] = [
             '프로젝트 모달 시스템',
             '다크 테마 디자인',
             '모달 시스템',
+        ],
+        troubleShooting: [
+            {
+                challenge: 'styled-components SSR 설정으로 인한 초기 렌더링 시 스타일 깜빡임 현상',
+                solution: 'ServerStyleSheet을 활용한 styled-components SSR 설정으로 FOUC 문제 해결',
+                reason: '처음에 스타일이 깜빡이는 문제가 발생해서 사용자 경험이 좋지 않다는 것을 느꼈습니다. <strong>FOUC</strong>라는 용어를 알게 되면서 <span>서버 사이드 렌더링</span>의 중요성을 깨달았습니다. <strong>ServerStyleSheet</strong>을 사용하니까 <span>초기 로딩 시에도 스타일이 바로 적용</span>되어서 문제가 해결되었습니다.'
+            },
+            {
+                challenge: 'Intersection Observer API를 활용한 애니메이션에서 성능 최적화 필요',
+                solution: 'Intersection Observer disconnect를 통한 메모리 누수 방지 및 성능 최적화',
+                reason: '<strong>Intersection Observer</strong>를 처음 사용할 때는 <span>메모리 누수</span>에 대해 잘 몰랐습니다. <strong>컴포넌트가 사라져도 observer가 계속 실행</strong>되고 있다는 걸 나중에 알게 되었고, <strong>disconnect</strong>를 해주니까 <span>성능이 훨씬 좋아졌습니다</span>. 이런 기본적인 것들을 놓치지 말아야겠다는 생각이 들었습니다.'
+            },
+            {
+                challenge: 'Container/Presenter 패턴 적용 시 상태 관리와 이벤트 핸들링 로직 분리',
+                solution: '컨테이너에서 로직 관리, 프레젠터에서 UI 렌더링하는 명확한 역할 분리',
+                reason: '처음에는 모든 로직을 한 컴포넌트에 다 넣어서 코드가 복잡해졌는데 <strong>관심사 분리</strong>의 중요성을 느끼고 <span>Container/Presenter 패턴</span>을 적용해봤는데, 코드가 훨씬 깔끔해지고 <span>유지보수하기 쉬워졌습니다.</span> 아직 많이 부족하지만 이런 패턴들을 하나씩 익혀나가겠습니다.'
+            },
+            {
+                challenge: '반응형 디자인 및 일관된 애니메이션 효과 구현',
+                solution: 'CSS 미디어 쿼리와 JavaScript 이벤트 리스너를 조합한 반응형 애니메이션 구현',
+                reason: '모바일과 데스크톱에서 <strong>일관된 사용자 경험</strong>을 제공하는 게 생각보다 어려웠습니다. <span>CSS만으로는 복잡한 애니메이션 제어가 어렵고</span>, <span>JavaScript만으로는 디바이스별 최적화가 어려워서</span> 두 기술을 조합해서 사용했습니다. 아직 완벽하지는 않지만 능숙하게 사용하기 위해 더욱 더 정진하겠습니다.'
+            },
+            {
+                challenge: 'TypeScript 타입 정의 시 styled-components props 전달 문제',
+                solution: 'shouldForwardProp을 활용한 DOM 전달 불필요한 props 필터링으로 TypeScript 경고 해결',
+                reason: '<strong>styled-components에서 커스텀 props를 사용할 때</strong> <span>TypeScript 경고가 자꾸 발생</span>했습니다. 조사해보니 <span>shouldForwardProp</span>이라는 걸 알게 되고 사용해보니까 <strong>경고가 사라지고</strong> <span>DOM에 불필요한 속성이 추가되는 것도 방지</span>할 수 있었습니다. 이러한 점들을 더 심도있게 공부해서 지식을 넓혀가야 되겠다라는 목표가 생겼습니다.'
+            }
         ]
     }
 ];
 
-export const ProjectContainer: React.FC<ProjectContainerProps> = () => {
+export const ProjectContainer: React.FC = () => {
     const [visible, setVisible] = useState<boolean[]>(Array(projects.length).fill(false));
     const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
