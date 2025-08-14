@@ -7,7 +7,7 @@ import { ProjectData} from './Project.types';
 const projects: ProjectData[] = [
     {
         title: 'CODIDRIP (개인프로젝트)',
-        period: '2025.03 ~ 2025.07',
+        period: '2025.03 ~ 2025.08',
         description: '코디 공유 웹사이트',
         detailedDescription: '패션 코디를 공유하고 소통할 수 있는 소셜 플랫폼입니다. 풀스택 개발을 통해 프론트엔드와 백엔드를 모두 구현했습니다.',
         techStack: ['HTML5', 'CSS3', 'JavaScript', 'React', 'TypeScript', 'Next.js', 'Styled-Components' , 'Axios' , 'Node.js' , 'Express', 'PostgreSQL' , 'Vercel' , 'Render' , 'Supabase'],
@@ -124,21 +124,6 @@ const projects: ProjectData[] = [
                 challenge: 'Intersection Observer API를 활용한 애니메이션에서 성능 최적화 필요',
                 solution: 'Intersection Observer disconnect를 통한 메모리 누수 방지 및 성능 최적화',
                 reason: '<strong>Intersection Observer</strong>를 처음 사용할 때는 <span>메모리 누수</span>에 대해 잘 몰랐습니다. <strong>컴포넌트가 사라져도 observer가 계속 실행</strong>되고 있다는 걸 나중에 알게 되었고, <strong>disconnect</strong>를 해주니까 <span>성능이 훨씬 좋아졌습니다</span>. 이런 기본적인 것들을 놓치지 말아야겠다는 생각이 들었습니다.'
-            },
-            {
-                challenge: 'Container/Presenter 패턴 적용 시 상태 관리와 이벤트 핸들링 로직 분리',
-                solution: '컨테이너에서 로직 관리, 프레젠터에서 UI 렌더링하는 명확한 역할 분리',
-                reason: '처음에는 모든 로직을 한 컴포넌트에 다 넣어서 코드가 복잡해졌는데 <strong>관심사 분리</strong>의 중요성을 느끼고 <span>Container/Presenter 패턴</span>을 적용해봤는데, 코드가 훨씬 깔끔해지고 <span>유지보수하기 쉬워졌습니다.</span> 아직 많이 부족하지만 이런 패턴들을 하나씩 익혀나가겠습니다.'
-            },
-            {
-                challenge: '반응형 디자인 및 일관된 애니메이션 효과 구현',
-                solution: 'CSS 미디어 쿼리와 JavaScript 이벤트 리스너를 조합한 반응형 애니메이션 구현',
-                reason: '모바일과 데스크톱에서 <strong>일관된 사용자 경험</strong>을 제공하는 게 생각보다 어려웠습니다. <span>CSS만으로는 복잡한 애니메이션 제어가 어렵고</span>, <span>JavaScript만으로는 디바이스별 최적화가 어려워서</span> 두 기술을 조합해서 사용했습니다. 아직 완벽하지는 않지만 능숙하게 사용하기 위해 더욱 더 정진하겠습니다.'
-            },
-            {
-                challenge: 'TypeScript 타입 정의 시 styled-components props 전달 문제',
-                solution: 'shouldForwardProp을 활용한 DOM 전달 불필요한 props 필터링으로 TypeScript 경고 해결',
-                reason: '<strong>styled-components에서 커스텀 props를 사용할 때</strong> <span>TypeScript 경고가 자꾸 발생</span>했습니다. 조사해보니 <span>shouldForwardProp</span>이라는 걸 알게 되고 사용해보니까 <strong>경고가 사라지고</strong> <span>DOM에 불필요한 속성이 추가되는 것도 방지</span>할 수 있었습니다. 이러한 점들을 더 심도있게 공부해서 지식을 넓혀가야 되겠다라는 목표가 생겼습니다.'
             }
         ],
         projectReflection: [
