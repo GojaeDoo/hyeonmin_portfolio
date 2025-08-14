@@ -32,11 +32,13 @@ export const AboutPresenter = ({
                             <S.AboutIcon
                                 onMouseEnter={() => onIconMouseEnter('github')}
                                 onMouseLeave={onIconMouseLeave}
+                                onClick={() => window.open('https://github.com/GojaeDoo', '_blank')}
+                                style={{ cursor: 'pointer' }}
                             >
                                 {React.createElement(FaGithub as any, { size: 36, color: "#ffffff" })}
                                 {hoveredIcon === 'github' && (
                                     <S.IconTooltip className="visible">
-                                        <a href="https://github.com/GojaeDoo" target="_blank">GitHub 프로필 보기</a>
+                                        GitHub 프로필 보기
                                     </S.IconTooltip>
                                 )}
                             </S.AboutIcon>

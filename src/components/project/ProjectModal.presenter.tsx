@@ -95,6 +95,9 @@ export const ProjectModalPresenter: React.FC<ProjectModalPresenterProps> = ({
                                         </S.ReflectionContent>
                                     </S.ReflectionItem>
                                 ))}
+                                <S.ReflectionInfoText>
+                                    자세한 소감은 GitHub README에서 확인부탁드립니다!
+                                </S.ReflectionInfoText>
                             </S.ProjectReflectionSection>
                         )}
                     </S.ProjectDescription>

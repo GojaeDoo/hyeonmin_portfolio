@@ -55,10 +55,11 @@ export const ProjectCard = styled.div.withConfig({
     background: #232323;
     border-radius: 18px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.12);
-    padding: 32px 28px 24px 28px;
+    padding: 32px 28px 50px 28px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    position: relative;
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.5s, transform 0.5s, filter 0.3s ease, transform 0.3s ease;
@@ -80,7 +81,7 @@ export const ProjectCard = styled.div.withConfig({
     }
     
     @media (max-width: 600px) {
-        padding: 16px 10px 12px 10px;
+        padding: 16px 10px 40px 10px;
         border-radius: 10px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.10);
         
@@ -147,13 +148,20 @@ export const TechStack = styled.span`
 `;
 
 export const ProjectLink = styled.a`
-    margin-top: 8px;
+    position: absolute;
+    bottom: 16px;
+    left: 28px;
     color: #7ecfff;
     font-size: 1rem;
     text-decoration: underline;
     cursor: pointer;
     &:hover {
         color: #4db3fa;
+    }
+    
+    @media (max-width: 600px) {
+        bottom: 12px;
+        left: 10px;
     }
 `;
 
@@ -606,7 +614,6 @@ export const ProjectDescription = styled.div`
     p {
         font-size: 1.1rem;
         line-height: 1.6;
-        margin-bottom: 24px;
         color: #d0d0d0;
     }
     
@@ -618,7 +625,6 @@ export const ProjectDescription = styled.div`
         
         p {
             font-size: 1rem;
-            margin-bottom: 20px;
         }
     }
 `;
@@ -803,4 +809,16 @@ export const ReflectionText = styled.div`
     @media (max-width: 480px) {
         font-size: 0.85rem;
     }
+`;
+
+export const ReflectionInfoText = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #4db3fa;
+    margin-top: 10px;
+    font-size: 1rem;
+    line-height: 1.4;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
 `;
