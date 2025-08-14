@@ -787,9 +787,6 @@ export const ReflectionText = styled.div`
     font-size: 0.85rem;
     line-height: 1.4;
     text-align: left;
-    padding: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
     width: 100%;
     font-family: 'Inter', sans-serif;
     
