@@ -14,6 +14,10 @@ export interface ProjectData {
         solution: string; 
         reason: string; 
     }>;
+    projectReflection?: Array<{
+        title: string;
+        content: string;
+    }>;
 }
 
 export interface ProjectPresenterProps {

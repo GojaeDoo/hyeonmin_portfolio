@@ -27,6 +27,18 @@ export const ProjectModalPresenter: React.FC<ProjectModalPresenterProps> = ({
                         <S.ProjectImage src={project.image} alt={project.title + ' 이미지'} />
                         <S.ModalSubTitle>프로젝트 설명</S.ModalSubTitle>
                         <p>{project.detailedDescription}</p>
+                        <S.LinksSection>
+                            {project.githubLink && (
+                                <S.ViewProjectButton onClick={onGithubClick}>
+                                    GitHub
+                                </S.ViewProjectButton>
+                            )}
+                            {project.demoLink && (
+                                <S.ViewProjectButton onClick={onDemoClick}>
+                                    WebSite
+                                </S.ViewProjectButton>
+                            )}
+                        </S.LinksSection>
                         <S.ModalBar />
                         
                         <S.TechStackSection>
@@ -50,17 +62,17 @@ export const ProjectModalPresenter: React.FC<ProjectModalPresenterProps> = ({
                         
                         {project.troubleShooting && project.troubleShooting.length > 0 && (
                             <S.TroubleShootingSection>
-                                <S.ModalSubTitle>도전 과제</S.ModalSubTitle>
+                                <S.ModalSubTitle>CHALLENGE & SOLUTION</S.ModalSubTitle>
                                 {project.troubleShooting.map((item, index) => (
                                     <S.ChallengeItem key={index}>
                                         <S.ChallengeContent>
-                                            <S.ChallengeText>{index+1}. {item.challenge}</S.ChallengeText>
+                                            <S.ChallengeText>CHALLENGE : {item.challenge}</S.ChallengeText>
                                             <S.SolutionContent>
-                                                {item.solution}
+                                            SOLUTION : {item.solution}
                                             </S.SolutionContent>
-                                            {item.reason && (
+                                            {item.reason && (   
                                                 <S.ReasonContent>
-                                                    <S.ReasonLabel>채택이유</S.ReasonLabel>
+                                                    <S.ReasonLabel>REASON</S.ReasonLabel>
                                                     <S.ReasonText dangerouslySetInnerHTML={{ __html: item.reason }} />
                                                 </S.ReasonContent>
                                             )}
@@ -69,19 +81,22 @@ export const ProjectModalPresenter: React.FC<ProjectModalPresenterProps> = ({
                                 ))}
                             </S.TroubleShootingSection>
                         )}
-                    
-                        <S.LinksSection>
-                            {project.githubLink && (
-                                <S.ViewProjectButton onClick={onGithubClick}>
-                                    GitHub
-                                </S.ViewProjectButton>
-                            )}
-                            {project.demoLink && (
-                                <S.ViewProjectButton onClick={onDemoClick}>
-                                    WebSite
-                                </S.ViewProjectButton>
-                            )}
-                        </S.LinksSection>
+                        
+                        {project.projectReflection && project.projectReflection.length > 0 && (
+                            <S.ProjectReflectionSection>
+                                <S.ModalSubTitle>프로젝트 소감</S.ModalSubTitle>
+                                {project.projectReflection.map((reflection, index) => (
+                                    <S.ReflectionItem key={index}>
+                                        <S.ReflectionContent>
+                                            <S.ReflectionTitle>{reflection.title}</S.ReflectionTitle>
+                                            <S.ReflectionText 
+                                                dangerouslySetInnerHTML={{ __html: reflection.content }}
+                                            />
+                                        </S.ReflectionContent>
+                                    </S.ReflectionItem>
+                                ))}
+                            </S.ProjectReflectionSection>
+                        )}
                     </S.ProjectDescription>
                 </S.ModalBody>
             </S.ModalContent>

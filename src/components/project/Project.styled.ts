@@ -456,7 +456,7 @@ export const ModalLink = styled.a`
 `;
 
 export const TroubleShootingSection = styled.div`
-    margin : 24px 0;
+    margin : 50px 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -638,8 +638,6 @@ export const TechStackSection = styled.div`
 
 export const TechList = styled.div`
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
 `;
@@ -684,7 +682,7 @@ export const ViewProjectButton = styled.button`
 `;
 
 export const FeaturesSection = styled.div`
-    margin : 24px 0;
+    margin : 50px 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -729,13 +727,83 @@ export const FeatureItem = styled.li`
 
 export const LinksSection = styled.div`
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 12px;
-    margin-top: 24px;
+    margin : 24px 0;
     flex-wrap: wrap;
     
     @media (max-width: 768px) {
-        flex-direction: column;
+        flex-direction: row;
         gap: 10px;
         margin-top: 20px;
+    }
+`;
+
+export const ProjectReflectionSection = styled.div`
+    margin: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+`;
+
+export const ReflectionItem = styled.div`
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 0;
+    cursor: default;
+    
+    &:last-child {
+        margin-bottom: 0;
+    }
+    
+    @media (max-width: 768px) {
+        margin-bottom: 20px;
+    }
+`;
+
+export const ReflectionContent = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+`;
+
+export const ReflectionTitle = styled.p`
+    display: flex;
+    color: #f5f5f5;
+    font-weight: 500;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+`;
+
+export const ReflectionText = styled.div`
+    color: #a0a0a0;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    text-align: left;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    
+    strong {
+        color: #4db3fa;
+        font-weight: 600;
+    }
+    
+    @media (max-width: 768px) {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    @media (max-width: 480px) {
+        font-size: 0.85rem;
     }
 `;
